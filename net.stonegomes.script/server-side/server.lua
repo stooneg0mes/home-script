@@ -11,7 +11,6 @@ AddEventHandler('onServerResourceStart', function(name)
         return
     end
 
-
     MySQL.Async.execute("CREATE TABLE IF NOT EXISTS homes(id VARCHAR(32) NOT NULL PRIMARY KEY, x FLOAT NOT NULL, y FLOAT NOT NULL, z FLOAT NOT NULL)")
 
     MySQL.Async.fetchAll("SELECT * FROM homes", function(result)
@@ -50,13 +49,13 @@ end)
 
 RegisterCommand('sethome', function(source, args)
     if (#args == 0) then
-        print("Você precisa passar um argumento.")
+        print("You need to run an argument.")
         return
     end
 
     local homeId = args[1]
     if (containsHomeKey(homeId)) then
-        print("Já existe uma home com esse nome fofinho.")
+        print("There is already a home with that ID.")
         return
     end
 
@@ -66,5 +65,5 @@ RegisterCommand('sethome', function(source, args)
     local home = Home.new(homeId, playerX, playerY, playerZ)
     putHomeValue(homeId, home)
 
-    print("Criada a home " .. homeId .. " com sucesso.")
+    print("Created the home " .. homeId .. " successfully.")
 end)
